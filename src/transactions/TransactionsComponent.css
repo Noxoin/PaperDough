@@ -1,0 +1,9 @@
+#TransactionsComponent {
+	max-width: 1200px;
+	margin: auto;
+}
+
+#TransactionsComponent .TransactionsTable {
+	margin-top: 2em;
+	margin-bottom: 2em;
+}
