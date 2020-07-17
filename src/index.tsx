@@ -1,8 +1,18 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { Server } from 'miragejs';
+
 import './index.css';
 import PaperDough from './PaperDough';
 import * as serviceWorker from './serviceWorker';
+
+import { LocalApiTransactions } from './localapi/Transactions';
+
+new Server({
+	routes() {
+		LocalApiTransactions(this);
+	},
+});
 
 ReactDOM.render(<PaperDough />, document.getElementById('root'));
 

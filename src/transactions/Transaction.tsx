@@ -18,13 +18,20 @@ class Transaction {
 	description: string;
 	amount: number;
 
-	constructor() {
-		this.date = new Date();
-		this.type = Type.UNKNOWN;
-		this.category = "";
-		this.account = "";
-		this.description = "";
-		this.amount = 0.0;
+	constructor({
+			date = new Date(),
+			type = Type.UNKNOWN,
+			category = "",
+			account = "",
+			description = "",
+			amount = 0.0,
+		} = {}) {
+		this.date = new Date(date);
+		this.type = type;
+		this.category = category;
+		this.account = account;
+		this.description = description;
+		this.amount = amount;
 	}
 	
 	getDate(): Date {

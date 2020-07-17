@@ -1,10 +1,37 @@
 import React from 'react';
-import { Header, Table } from 'semantic-ui-react';
+import { Header, Loader, Table } from 'semantic-ui-react';
 import './TransactionsComponent.css';
 
-import { Transaction, Type } from './Transaction';
+import { Transaction } from './Transaction';
 
-class TransactionsComponent extends React.Component {
+interface IProps {}
+
+interface IState {
+	transactions: Transaction[];
+	isLoading: boolean;
+}
+
+class TransactionsComponent extends React.Component<IProps, IState> {
+
+	constructor(props: IProps) {
+    super(props);
+
+    this.state = {
+      transactions: [],
+			isLoading: true,
+    };
+  }
+
+	componentDidMount() {
+		fetch("/api/transactions")
+			.then((res) => res.json())
+			.then((json) => {
+				this.setState({
+					transactions: json.transactions.map((t: Transaction) => new Transaction(t)),
+					isLoading: false,
+				})
+			});
+	}
 
 	renderHeaders() {
 		return (
@@ -34,32 +61,27 @@ class TransactionsComponent extends React.Component {
 		);
 	}
 
+	renderLoading() {
+		return (
+			<Table.Row>
+				<Table.Cell colSpan="6">
+					<Loader active inline='centered' />
+				</Table.Cell>
+			</Table.Row>
+		);
+	}
+
 	render() {
-		const t1 = new Transaction();
-		t1.date = new Date("2020-07-10");
-		t1.type = Type.EXPENSE;
-		t1.category = "Restaurants";
-		t1.account = "TD Visa Infinite";
-		t1.description = "Timothy's Coffee";
-		t1.amount = 5.19;
-
-		const t2 = new Transaction();
-		t2.date = new Date("2020-07-10");
-		t2.type = Type.REVENUE;
-		t2.category = "Income";
-		t2.account = "TD All-Inclusive Bank";
-		t2.description = "Google Pay";
-		t2.amount = 3318.91;
-
-		const transactions: Transaction[] = [t1, t2];
-
+		const {transactions, isLoading} = this.state;
 		return (
 			<div id="TransactionsComponent">
 				<Header size='huge'>Transactions</Header>
 				<Table className="TransactionsTable">
 					{this.renderHeaders()}
 					<Table.Body>
-						{transactions.map((t, i) => this.renderTransaction(t, i))}
+						{isLoading ?
+							this.renderLoading() :
+							transactions.map((t, i) => this.renderTransaction(t, i))}
 					</Table.Body>
 				</Table>
 			</div>
