@@ -1,5 +1,5 @@
 import React from 'react';
-import { Header, Loader, Table } from 'semantic-ui-react';
+import { Container, Header, Loader, Table } from 'semantic-ui-react';
 import './TransactionsPage.css';
 
 import { Transaction } from './Transaction';
@@ -74,7 +74,7 @@ class TransactionsPage extends React.Component<IProps, IState> {
 	render() {
 		const {transactions, isLoading} = this.state;
 		return (
-			<div id="TransactionsPage">
+			<Container id="TransactionsPage">
 				<Header size='huge'>Transactions</Header>
 				<Table className="TransactionsTable">
 					{this.renderHeaders()}
@@ -84,7 +84,7 @@ class TransactionsPage extends React.Component<IProps, IState> {
 							transactions.map((t, i) => this.renderTransaction(t, i))}
 					</Table.Body>
 				</Table>
-			</div>
+			</Container>
 		);
 	}
 }

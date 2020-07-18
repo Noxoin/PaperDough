@@ -1,9 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
-import { Button, Container, Icon, Menu, Segment } from 'semantic-ui-react';
+import { Button, Container, Icon, Image, Menu, Segment } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './PaperDough.css';
 
+import CashflowPage from './cashflow/CashflowPage';
 import TransactionsPage from './transactions/TransactionsPage';
 
 function Index() {
@@ -31,7 +32,7 @@ function Header() {
 			<Container>
 				<Menu size="large" inverted pointing secondary className="Menu">
 					<Menu.Item>
-						<img className='LogoImage' src='https://www.noxoin.com/assets/images/solid-logo.png' width='64' alt='logo' />
+						<Image size='mini' src='https://www.noxoin.com/assets/images/solid-logo.png' alt='logo' />
 					</Menu.Item>
 					<Menu.Item name='Dashboard' as={NavLink} exact to='/' />
 					<Menu.Item name='Balance' as={NavLink} to='/balance' />
@@ -49,9 +50,7 @@ function ProfileMenu() {
 		<Menu.Menu
 			name='Login and Signup'
 			position='right'>
-			<Menu.Item>
-				<Button>Log In</Button>
-			</Menu.Item>
+			<Menu.Item name='Log In' />
 			<Menu.Item>
 				<Button primary>Sign Up</Button>
 			</Menu.Item>
@@ -69,16 +68,16 @@ function Footer() {
 					</Menu.Item>
 					<Menu.Item position="right">
 						<a href="https://ca.linkedin.com/in/dixon-cheung-42472b37">
-							<Icon size="large" name="linkedin square"></Icon>
+							<Icon size="large" name="linkedin square" color='grey'></Icon>
 						</a>
 						<a href="http://www.github.com/Noxoin">
-							<Icon size="large" name="github square"></Icon>
+							<Icon size="large" name="github square" color='grey'></Icon>
 						</a>
 						<a href="http://stackoverflow.com/users/2969219/noxoin">
-							<Icon size="large" name="stack overflow"></Icon>
+							<Icon size="large" name="stack overflow" color='grey'></Icon>
 						</a>
 						<a href="https://open.spotify.com/user/12154825434">
-							<Icon size="large" name="spotify"></Icon>
+							<Icon size="large" name="spotify" color='grey'></Icon>
 						</a>
 					</Menu.Item>
 				</Menu>
@@ -92,10 +91,13 @@ const PaperDough: React.FC = () => {
     <div id="PaperDough">
 			<Router>
 				{Header()}
-				<Switch>
-					<Route path="/transactions" component={TransactionsPage} />
-					<Route path="/" component={Index} />
-				</Switch>
+				<Segment vertical>
+					<Switch>
+						<Route path="/cashflow" component={CashflowPage} />
+						<Route path="/transactions" component={TransactionsPage} />
+						<Route path="/" component={Index} />
+					</Switch>
+				</Segment>
 				{Footer()}
 			</Router>
     </div>
