@@ -1,6 +1,6 @@
 import React from 'react';
 import { Header, Loader, Table } from 'semantic-ui-react';
-import './TransactionsComponent.css';
+import './TransactionsPage.css';
 
 import { Transaction } from './Transaction';
 
@@ -11,7 +11,7 @@ interface IState {
 	isLoading: boolean;
 }
 
-class TransactionsComponent extends React.Component<IProps, IState> {
+class TransactionsPage extends React.Component<IProps, IState> {
 
 	constructor(props: IProps) {
     super(props);
@@ -74,7 +74,7 @@ class TransactionsComponent extends React.Component<IProps, IState> {
 	render() {
 		const {transactions, isLoading} = this.state;
 		return (
-			<div id="TransactionsComponent">
+			<div id="TransactionsPage">
 				<Header size='huge'>Transactions</Header>
 				<Table className="TransactionsTable">
 					{this.renderHeaders()}
@@ -89,4 +89,4 @@ class TransactionsComponent extends React.Component<IProps, IState> {
 	}
 }
 
-export default TransactionsComponent;
+export default TransactionsPage;

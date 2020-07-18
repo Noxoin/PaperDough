@@ -4,7 +4,7 @@ import { Button, Container, Icon, Menu, Segment } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './PaperDough.css';
 
-import TransactionsComponent from './transactions/TransactionsComponent';
+import TransactionsPage from './transactions/TransactionsPage';
 
 function Index() {
 	return (
@@ -93,7 +93,7 @@ const PaperDough: React.FC = () => {
 			<Router>
 				{Header()}
 				<Switch>
-					<Route path="/transactions" component={TransactionsComponent} />
+					<Route path="/transactions" component={TransactionsPage} />
 					<Route path="/" component={Index} />
 				</Switch>
 				{Footer()}

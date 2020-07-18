@@ -1,9 +1,9 @@
-#TransactionsComponent {
+#TransactionsPage {
 	max-width: 1100px;
 	margin: 48px auto;
 }
 
-#TransactionsComponent .TransactionsTable {
+#TransactionsPage .TransactionsTable {
 	margin-top: 2em;
 	margin-bottom: 2em;
 }
