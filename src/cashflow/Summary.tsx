@@ -12,6 +12,20 @@ const options: ChartOptions = {
 	}
 };
 
+// TODO: Update colours for DoughNut chart.
+const chartColours: string[] = [
+	'#FF6384',
+	'#36A2EB',
+	'#FFCE56',
+	'#D3212D',
+	'#7CB9E8',
+	'#0048BA',
+	'#B0BF1A',
+	'#BFFF00',
+	'#064E40',
+	'#FFAA1D',
+];
+
 interface IProps {
 	name: string;
 	value: string;
@@ -35,7 +49,7 @@ class Summary extends React.Component<IProps, IState> {
 		});
 		return {
 			labels: labels,
-			datasets: [{ data: chartData }],
+			datasets: [{ data: chartData, backgroundColor: chartColours, hoverBackgroundColor: chartColours}],
 		};
 	}
 
