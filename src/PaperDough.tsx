@@ -1,6 +1,6 @@
 import React from 'react';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
-import { Segment, Container, Menu, Icon } from 'semantic-ui-react';
+import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import { Button, Container, Icon, Menu, Segment } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './PaperDough.css';
 
@@ -29,14 +29,33 @@ function Header() {
 	return (
 		<Segment vertical aligned='center' inverted>
 			<Container>
-				<Menu inverted size="large" pointing secondary>
-					<img src="https://www.noxoin.com/assets/images/solid-logo.png" height="64" alt="logo" />
+				<Menu size="large" inverted pointing secondary className="Menu">
 					<Menu.Item>
-						<h1>PaperDough</h1>
+						<img className='LogoImage' src='https://www.noxoin.com/assets/images/solid-logo.png' width='64' alt='logo' />
 					</Menu.Item>
+					<Menu.Item name='Dashboard' as={NavLink} exact to='/' />
+					<Menu.Item name='Balance' as={NavLink} to='/balance' />
+					<Menu.Item name='Cashflow' as={NavLink} to='/cashflow' />
+					<Menu.Item name='Transactions' as={NavLink} to='/transactions' />
+					{ProfileMenu()}
 				</Menu>
 			</Container>
 		</Segment>
+	);
+}
+
+function ProfileMenu() {
+	return (
+		<Menu.Menu
+			name='Login and Signup'
+			position='right'>
+			<Menu.Item>
+				<Button>Log In</Button>
+			</Menu.Item>
+			<Menu.Item>
+				<Button primary>Sign Up</Button>
+			</Menu.Item>
+		</Menu.Menu>
 	);
 }
 
@@ -70,15 +89,15 @@ function Footer() {
 
 const PaperDough: React.FC = () => {
   return (
-    <div className="PaperDough">
-			{Header()}
+    <div id="PaperDough">
 			<Router>
+				{Header()}
 				<Switch>
 					<Route path="/transactions" component={TransactionsComponent} />
 					<Route path="/" component={Index} />
 				</Switch>
+				{Footer()}
 			</Router>
-			{Footer()}
     </div>
   );
 }
