@@ -1,3 +1,6 @@
+import {formatAsCurrency} from '../common/CurrencyFormatter';
+import {formatAsDate} from '../common/DateFormatter';
+
 enum Type {
 	UNKNOWN,
 	REVENUE,
@@ -39,7 +42,7 @@ class Transaction {
 	}
 
 	getDisplayDate(): string {
-		return this.date.toLocaleString();
+		return formatAsDate(this.date);
 	}
 
 	getType(): Type {
@@ -67,7 +70,7 @@ class Transaction {
 	}
 
 	getDisplayAmount(): string {
-		return '$' + this.amount.toFixed(2).replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1,");
+		return formatAsCurrency(this.amount);
 	}
 }
 

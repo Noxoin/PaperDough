@@ -1,7 +1,10 @@
 import React from 'react';
-import { ChartOptions} from 'chart.js';
+import { Link } from 'react-router-dom';
+import { ChartOptions } from 'chart.js';
 import { Doughnut } from 'react-chartjs-2';
 import { Header, Grid, Segment, Statistic, Table } from 'semantic-ui-react';
+
+import CategorySummary from './CategorySummary';
 
 const options: ChartOptions = {
 	layout: {
@@ -29,15 +32,11 @@ const chartColours: string[] = [
 interface IProps {
 	name: string;
 	value: string;
+	sectionLink: string;
 	data: CategorySummary[];
 }
 
 interface IState {}
-
-class CategorySummary {
-	name: string = '';
-	value: number = 0.0;
-}
 
 class Summary extends React.Component<IProps, IState> {
 	getChartData(data: CategorySummary[]): any {
@@ -81,7 +80,7 @@ class Summary extends React.Component<IProps, IState> {
 	render() {
 		return (
 			<Segment vertical>
-				<Header size='large'>{this.props.name}</Header>
+				<Header size='large' ><Link to={this.props.sectionLink}>{this.props.name} &gt;</Link></Header>
 				<Statistic size='mini'>
 					<Statistic.Value>{this.props.value}</Statistic.Value>
 				</Statistic>

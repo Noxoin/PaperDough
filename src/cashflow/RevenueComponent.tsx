@@ -12,7 +12,7 @@ const data: CategorySummary[] = [
 class RevenueComponent extends React.Component {
 	render() {
 		return (
-			<Summary name="Revenue" value="CAD$ 12,345.00" data={data} />
+			<Summary name="Revenue" value="CAD$ 12,345.00" sectionLink="/cashflow/revenues" data={data} />
 		);
 	}
 }

@@ -4,6 +4,8 @@ import { Button, Container, Icon, Image, Menu, Segment } from 'semantic-ui-react
 import logo from './logo.svg';
 import './PaperDough.css';
 
+import ExpensesPage from './cashflow/ExpensesPage';
+import RevenuesPage from './cashflow/RevenuesPage';
 import CashflowPage from './cashflow/CashflowPage';
 import TransactionsPage from './transactions/TransactionsPage';
 
@@ -31,7 +33,7 @@ function Header() {
 		<Segment vertical aligned='center' inverted>
 			<Container>
 				<Menu size="large" inverted pointing secondary className="Menu">
-					<Menu.Item as={Link} exact to='/'>
+					<Menu.Item as={Link} exact="true" to='/'>
 						<Image size='mini' src='https://www.noxoin.com/assets/images/solid-logo.png' alt='logo' />
 					</Menu.Item>
 					<Menu.Item name='Overview' as={NavLink} to='/overview' />
@@ -93,6 +95,8 @@ const PaperDough: React.FC = () => {
 				{Header()}
 				<Segment vertical>
 					<Switch>
+						<Route path="/cashflow/expenses" component={ExpensesPage} />
+						<Route path="/cashflow/revenues" component={RevenuesPage} />
 						<Route path="/cashflow" component={CashflowPage} />
 						<Route path="/transactions" component={TransactionsPage} />
 						<Route path="/" component={Index} />
