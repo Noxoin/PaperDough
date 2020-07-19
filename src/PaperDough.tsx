@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, NavLink, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, NavLink, Link, Route, Switch } from 'react-router-dom';
 import { Button, Container, Icon, Image, Menu, Segment } from 'semantic-ui-react';
 import logo from './logo.svg';
 import './PaperDough.css';
@@ -31,10 +31,10 @@ function Header() {
 		<Segment vertical aligned='center' inverted>
 			<Container>
 				<Menu size="large" inverted pointing secondary className="Menu">
-					<Menu.Item>
+					<Menu.Item as={Link} exact to='/'>
 						<Image size='mini' src='https://www.noxoin.com/assets/images/solid-logo.png' alt='logo' />
 					</Menu.Item>
-					<Menu.Item name='Dashboard' as={NavLink} exact to='/' />
+					<Menu.Item name='Overview' as={NavLink} to='/overview' />
 					<Menu.Item name='Balance' as={NavLink} to='/balance' />
 					<Menu.Item name='Cashflow' as={NavLink} to='/cashflow' />
 					<Menu.Item name='Transactions' as={NavLink} to='/transactions' />

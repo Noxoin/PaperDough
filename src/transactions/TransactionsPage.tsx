@@ -42,7 +42,7 @@ class TransactionsPage extends React.Component<IProps, IState> {
 					<Table.HeaderCell>Type</Table.HeaderCell>
 					<Table.HeaderCell>Account</Table.HeaderCell>
 					<Table.HeaderCell>Description</Table.HeaderCell>
-					<Table.HeaderCell>Amount</Table.HeaderCell>
+					<Table.HeaderCell textAlign="right">Amount</Table.HeaderCell>
 				</Table.Row>
 			</Table.Header>
 		);
