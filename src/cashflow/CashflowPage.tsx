@@ -2,7 +2,6 @@ import React from 'react';
 import { ChartOptions } from 'chart.js'
 import { Line } from 'react-chartjs-2';
 import { Header, Container, Segment } from 'semantic-ui-react';
-import './CashflowPage.css';
 
 import RevenueComponent from './RevenueComponent';
 import ExpenseComponent from './ExpenseComponent';
