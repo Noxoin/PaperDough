@@ -1,29 +1,32 @@
 import React from 'react';
-import { Container, Header, Loader, Table } from 'semantic-ui-react';
+import { Button, Container, Header, Icon, Loader, Table } from 'semantic-ui-react';
 import './TransactionsPage.css';
 
 import { Transaction } from './Transaction';
+import FilterComponent from './FilterComponent';
 
 interface IProps {}
 
 interface IState {
 	transactions: Transaction[];
 	isLoading: boolean;
+	hideFilters: boolean;
 }
 
 class TransactionsPage extends React.Component<IProps, IState> {
 
 	constructor(props: IProps) {
-    super(props);
+		super(props);
 
-    this.state = {
-      transactions: [],
+		this.state = {
+			transactions: [],
 			isLoading: true,
-    };
+			hideFilters: true,
+		};
   }
 
 	componentDidMount() {
-		fetch("/api/transactions")
+		fetch('/api/transactions')
 			.then((res) => res.json())
 			.then((json) => {
 				this.setState({
@@ -37,12 +40,12 @@ class TransactionsPage extends React.Component<IProps, IState> {
 		return (
 			<Table.Header>
 				<Table.Row>
-					<Table.HeaderCell>Date</Table.HeaderCell>
-					<Table.HeaderCell>Rev/Exp</Table.HeaderCell>
-					<Table.HeaderCell>Type</Table.HeaderCell>
-					<Table.HeaderCell>Account</Table.HeaderCell>
+					<Table.HeaderCell collapsing>Date</Table.HeaderCell>
+					<Table.HeaderCell collapsing>Rev/Exp</Table.HeaderCell>
+					<Table.HeaderCell collapsing>Type</Table.HeaderCell>
+					<Table.HeaderCell collapsing>Account</Table.HeaderCell>
 					<Table.HeaderCell>Description</Table.HeaderCell>
-					<Table.HeaderCell textAlign="right">Amount</Table.HeaderCell>
+					<Table.HeaderCell collapsing textAlign='right'>Amount</Table.HeaderCell>
 				</Table.Row>
 			</Table.Header>
 		);
@@ -51,12 +54,12 @@ class TransactionsPage extends React.Component<IProps, IState> {
 	renderTransaction(transaction: Transaction, index: number) {
 		return (
 			<Table.Row key={index}>
-				<Table.Cell>{transaction.getDisplayDate()}</Table.Cell>
-				<Table.Cell>{transaction.getTypeDisplayName()}</Table.Cell>
-				<Table.Cell>{transaction.getCategory()}</Table.Cell>
-				<Table.Cell>{transaction.getAccount()}</Table.Cell>
+				<Table.Cell collapsing>{transaction.getDisplayDate()}</Table.Cell>
+				<Table.Cell collapsing>{transaction.getTypeDisplayName()}</Table.Cell>
+				<Table.Cell collapsing>{transaction.getCategory()}</Table.Cell>
+				<Table.Cell collapsing>{transaction.getAccount()}</Table.Cell>
 				<Table.Cell>{transaction.getDescription()}</Table.Cell>
-				<Table.Cell textAlign="right">{transaction.getDisplayAmount()}</Table.Cell>
+				<Table.Cell collapsing textAlign='right'>{transaction.getDisplayAmount()}</Table.Cell>
 			</Table.Row>
 		);
 	}
@@ -64,19 +67,34 @@ class TransactionsPage extends React.Component<IProps, IState> {
 	renderLoading() {
 		return (
 			<Table.Row>
-				<Table.Cell colSpan="6">
+				<Table.Cell colSpan='6'>
 					<Loader active inline='centered' />
 				</Table.Cell>
 			</Table.Row>
 		);
 	}
 
+	toggleFilters() {
+		this.setState((prevState) => ({ hideFilters: !prevState.hideFilters}));
+	}
+
 	render() {
-		const {transactions, isLoading} = this.state;
+		const {transactions, isLoading, hideFilters} = this.state;
 		return (
-			<Container id="TransactionsPage">
+			<Container id='TransactionsPage'>
+				<div className='action_buttons'>
+					<Button floated='right' animated 
+									onClick={(e) => this.toggleFilters()}
+									active={!hideFilters}>
+						<Button.Content visible>
+							<Icon name='filter' />
+						</Button.Content>
+						<Button.Content hidden>Filter</Button.Content>
+					</Button>
+				</div>
 				<Header size='huge'>Transactions</Header>
-				<Table className="TransactionsTable">
+				<FilterComponent hideFilters={hideFilters}/>
+				<Table className='TransactionsTable'>
 					{this.renderHeaders()}
 					<Table.Body>
 						{isLoading ?
